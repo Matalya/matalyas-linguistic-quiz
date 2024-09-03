@@ -50,7 +50,7 @@ const questions = [{
     "score": 1,
     "question": "What is the official language of the United States?",
     "options": ["English", "Spanish", "French", "None"],
-    "correct": "None",
+    "correct": "D",
     "fact": "Despite English being a clear majority language, the US does not have a formally codified official language."
 },
 {
@@ -59,7 +59,7 @@ const questions = [{
     "score": 3,
     "question": "Which of the following is NOT a language spoken in France?",
     "options": ["French", "Aragonese", "Occitan", "Catalan"],
-    "correct": "Aragonese",
+    "correct": "B",
     "fact": "Despite bordering with France, Aragonese is only spoken in the Aragon region of Spain. French is the official language of governance, Occitan is spoken mostly in Southern France, and Catalan's range narrowly crosses the border into France and is recognized as a minority language in the Pyrénées-Orientales department."
 },
 {
@@ -68,7 +68,7 @@ const questions = [{
     "score" : 5,
     "question" : "Despite being the origin of English, England only places fourth as country with most speakers. With the United States being the first, which two are the countries with the second and third largest English speaking populations?",
     "options" : ["India and Pakistan", "Nigeria and Pakistan", "India and Australia", "Nigeria and India"],
-    "correct" : "India and Pakistan",
+    "correct" : "A",
     "fact" : "The United States has the most total English speakers, with 306 million, followed by India (129 million), Pakistan (104 million), the United Kingdom (68 million), and Nigeria (60 million). Due to its low population, Australia lands 12th with only 21 million speakers."
 },
 {
@@ -77,7 +77,7 @@ const questions = [{
     "score" : 5,
     "question" : "Trade and religious missions from Portugal to Asia have resulted in an at first glance surprising influence of Portuguese in the area. What of the following is NOT an actual effect of such missions?",
     "options" : ["considerable amount of Portuguese vocabulary in Old Japanese", "Portuguese being one of the official languages of China via Macau", "Portuguese architecture all across Eastern Asia", "Vasco da Gama, first European to reach India by sea, being the face of the 10 Rupees bill"],
-    "correct" : "Vasco da Gama, first European to reach India by sea, being the face of the 10 Rupees bill",
+    "correct" : "D",
     "fact" : "Even though Vasco da Gama was a real person and his achievements true as displayed, all Indian bills bear the face of late political ethicist Mahatma Gandhi, including the 10 rupees bill."
 },
 {
@@ -86,7 +86,7 @@ const questions = [{
     "score" : 5,
     "question" : "Trade and religious missions from Portugal to Asia have resulted in an at first glance surprising influence of Portuguese in the area. What of the following is NOT an actual effect of such missions?",
     "options" : ["considerable amount of Portuguese vocabulary in Old Japanese", "Portuguese being one of the official languages of China via Macau", "Portuguese architecture all across Eastern Asia", "Vasco da Gama, first European to reach India by sea, being the face of the 10 Rupees bill"],
-    "correct" : "Vasco da Gama, first European to reach India by sea, being the face of the 10 Rupees bill",
+    "correct" : "D",
     "fact" : "In actuality, all Indian bills bear the face of Mahatma Gandhi, including the 10 rupees bill."
 },
 {
@@ -95,7 +95,7 @@ const questions = [{
     "score" : 3,
     "question" : "What proto language is the mother of all Romance languages?",
     "options" : ["Proto Celtic","Proto Germanic","Proto Italic","Proto Slavic"],
-    "correct" : "Proto Italic",
+    "correct" : "C",
     "fact" : "Proto Italic is named after the Italic peninsula, where most of Italy's territory sits, and where Latin developed, which would spread via the Roman Empire and plant multiple seeds that'd become the tens of . The Celtic languages living today include Irish, Welsh and Scottish Gaelic. Proto Slavic evolved into the languages of Eastern Europe like Russian, Ukranian, Polish and Belorussian. Proto Germanic evolved into the languages of Northern Europe like English, German, Dutch and Frisian."
 },
 {
@@ -104,7 +104,7 @@ const questions = [{
     "score" : 3,
     "question" : "What major world language belongs to the Hellenic branch of the Indo European family?",
     "options" : ["Hebrew","Greek","Koine","Doric"],
-    "correct" : "Greek",
+    "correct" : "B",
     "fact" : "Hebrew is part of the Semitic language family. Koine and Doric are terms for Ancient Greek dialects."
 },
 {
@@ -113,7 +113,7 @@ const questions = [{
     "score" : 2,
     "question" : "Which of the following languages did not use hanzi (Chinese characters) as its writing system at any point?",
     "options" : ["Korean", "Vietnamese", "Thai", "Japanese"],
-    "correct" : "Thai",
+    "correct" : "C",
     "fact" : "The Chinese language has had a very large influence in the entire Asian continent for thousands of years, contributing to science, mythology, philosophy and culture across nations and centuries. The Korean implementation of hanzi was called hanja. In Japanese, it was kanji. In Vietnamese, it was chữ Hán. Thai has been written with the Thai script (อักษรไทย, akson thai) since 1283."
 },
 {
@@ -159,7 +159,7 @@ const questions = [{
     "magnitude" : "tens",
     "score" : 35,
     "answer" : 52,
-    "fact" : "Words like “knee”, “knight” and “knife” have a seemingly random silent <k> word initially because, at first, it used to actually be pronounced. <Knee> comes from Middle English's <kne>, pronounced /kneː/, <knife> from <knyf> /kniːf/, and <knight> from <knyght> /kniːxt/. This process where the initial part of a word is eliminated is called apheresis. This process didn't occur in German to the same degree, which means that the word-initial <k> is still pronounced in words like <Knecht>, cognatge of knight, <Knoten>, cognate of knot, and <Knie>, cognate of knee."
+    "fact" : "Words like “knee”, “knight” and “knife” have a seemingly random silent <k> word initially because, at first, it used to actually be pronounced. <Knee> comes from Middle English's <kne>, pronounced /kneː/, <knife> from <knyf> /kniːf/, and <knight> from <knyght> /kniːxt/. This process where the initial part of a word is eliminated is called apheresis. This process didn't occur in Germany to the same degree, which means that the word-initial <k> is still pronounced in words like <Knecht>, cognatge of knight, <Knoten>, cognate of knot, and <Knie>, cognate of knee."
 },
 {
     "id" : "ap5",
@@ -216,19 +216,45 @@ function print_question(chosen_question) {
     }
 }
 let provided_questions = [];
-function serve_question() {
-    let question_index = randint(QUESTION_COUNT);
-    while (provided_questions.includes(question_index)) {
-        question_index = randint(QUESTION_COUNT);
+function serve_question(question_index = -1) {
+    if (question_index == -1) {
+        let question_index = randint(QUESTION_COUNT);
+        while (provided_questions.includes(question_index)) {
+            question_index = randint(QUESTION_COUNT);
+        }
     }
     print_question(questions[question_index])
     return question_index
 }
 let user_score = 0;
 
+function process_user_input(user_input, current_question) {
+    if (user_input.slice(0, 11) == "debugserve ") {
+        for (let i = 0; i < QUESTION_COUNT; i++) {
+            if (questions[i].id == user_input_input.slice(11, 14)) {
+                serve_question(i)
+            }
+        }
+    } else if (user_input.slice(0, 10) == "debugscore") {
+        print(user_score);
+    } else {
+        if (current_question.type == approximation) {
+            print("Sorry, haven't made it yet; just have the score.")
+            user_score += current_question.score;
+        } else {
+            if (user_input == current_question.answer) {
+                user_score += current_question.score;
+                print(`Correct!\n${current.question.fact}`)
+            }
+        }
+    }
+}
+
 print("Welcome to Matalya's Linguistic Quiz.\nEach question has an inherent score. There are two types of questions. Multiple choice questions give you a small score if you select the correct option out of four. Approximation questions have a precise numerical answer that you have to get as close to as possible. The closer you get, the closer your score will be to the full score of the question. Good luck, and may Babel be with you!\nTo exit, just type \"exit\"");
 let user_input = input("Input \"begin\" when you're ready:\n");
 while (provided_questions.length != QUESTION_COUNT && user_input != "exit") {
-    provided_questions.push(serve_question())
+    current_question = serve_question()
+    provided_questions.push(current_question);
     user_input = input("Your answer:\n");
+    process_user_input(user_input, current_question);
 }
