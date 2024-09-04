@@ -218,7 +218,7 @@ function print_question(chosen_question) {
 let provided_questions = [];
 function serve_question(question_index = -1) {
     if (question_index == -1) {
-        let question_index = randint(QUESTION_COUNT);
+        question_index = randint(QUESTION_COUNT);
         while (provided_questions.includes(question_index)) {
             question_index = randint(QUESTION_COUNT);
         }
@@ -238,7 +238,7 @@ function process_user_input(user_input, current_question) {
     } else if (user_input.slice(0, 10) == "debugscore") {
         print(user_score);
     } else {
-        if (current_question.type == approximation) {
+        if (current_question.type == "approximation") {
             print("Sorry, haven't made it yet; just have the score.")
             user_score += current_question.score;
         } else {
