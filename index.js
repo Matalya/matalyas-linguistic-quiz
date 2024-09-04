@@ -11,7 +11,7 @@ function input(promptText) {
 
     while (true) {
         const chunk = fs.readSync(
-            process.stdin.fd,
+            0,
             dataBuffer,
             bytesRead,
             BUFFERSIZE - bytesRead,
